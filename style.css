@@ -1,0 +1,11 @@
+.w-450{
+
+    width:450px;
+}
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajustez la hauteur selon vos besoins */
+    overflow-y: auto; /* Ajoutez un défilement vertical si nécessaire */
+}
