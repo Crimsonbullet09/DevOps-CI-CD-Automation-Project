@@ -4,7 +4,7 @@ pipeline {
     environment {
         registry = "aymane55/automated-web-app"
         registryCredential = 'dockerhub' 
-        buildNumber = ${env.BUILD_NUMBER}
+        buildNumber = "${env.BUILD_NUMBER}"
     }
 
     stages {
