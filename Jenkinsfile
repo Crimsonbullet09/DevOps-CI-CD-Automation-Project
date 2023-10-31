@@ -1,7 +1,5 @@
 pipeline {
     agent any
-    checkout scm
-    def dockerImage
 
     environment {
     	registry = "aymane55/automated-web-app"
