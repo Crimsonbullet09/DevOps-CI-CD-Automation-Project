@@ -2,31 +2,34 @@ pipeline {
     agent any
 
     environment {
-        buildNumber = "${env.BUILD_NUMBER}"
+        registry = "aymane55/automated-web-app"
     }
 
+    def dockerImage            // Declaring dockerImage at the pipeline level
+
     stages {
-        stage('Build Docker Image') {
+        stage('Build image') {
             steps {
                 script {
                     echo 'Building Docker Image...'
-                    dockerImage = docker.build("automated-web-app:${buildNumber}")
+                    dockerImage = docker.build("$registry:${env.BUILD_NUMBER}")
                 }
             }
         }
+
         stage('Run Docker Container') {
             steps {
                 script {
                     echo 'Running Docker Container...'
-                    sh "docker run -d -p 3000:3000 automated-web-app:${buildNumber}"
+                    sh "sudo docker run -d -p 3000:3000 $registry:${env.BUILD_NUMBER}"
                 }
             }
         }
-        stage('Push Image to DockerHub') {
+
+        stage('Push image') {
             steps {
                 script {
-                    echo 'Pushing Docker Image to DockerHub...'
-                    docker.withRegistry('https://registry-1.docker.io/v2/', 'dockerhub') {
+                    docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
                         dockerImage.push()
                     }
                 }
