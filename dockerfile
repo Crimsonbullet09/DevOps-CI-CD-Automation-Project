@@ -1,9 +1,9 @@
 FROM php:8.2-cli
 
-WORKDIR /var/www/html                                                           # Set working directory in the container
+WORKDIR /var/www/html                                                           
 
-COPY ./ /var/www/html                                                           # Copy the application files to the container
+COPY ./ /var/www/html                                                         
 
-EXPOSE 3000                                                                     # Expose port 3000
+EXPOSE 3000                                      
 
-CMD ["php", "-S", "0.0.0.0:3000", "-t", "/var/www/html", "reservation2.php"]    # Start a basic PHP server on port 3000
+CMD ["php", "-S", "0.0.0.0:3000", "-t", "/var/www/html", "reservation2.php"]
