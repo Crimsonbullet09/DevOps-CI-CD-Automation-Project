@@ -3,7 +3,6 @@ pipeline {
 
     environment {
     	registry = "aymane55/automated-web-app"
-        registryCredential = 'dockerhub' 
         buildNumber = "${env.BUILD_NUMBER}"
     }
 
@@ -25,9 +24,8 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', registryCredential) {
+                    withDockerRegistry([ credentialsId: "dockerhub", url: "https://index.docker.io/v1/" ]) {
                         sh "sudo docker push ${registry}:${buildNumber}"
-
                     }
                 }
             }
