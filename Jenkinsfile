@@ -9,16 +9,12 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                script {
-                    sh "echo "built successfully" "
-                }
+                    echo 'built successfully'
             }
         }
         stage('Run Docker Container') {
             steps {
-                script {
-                    sh "echo "running successfully" "
-                }
+                    echo 'running successfully'
             }
         }
         stage('Push to DockerHub') {
