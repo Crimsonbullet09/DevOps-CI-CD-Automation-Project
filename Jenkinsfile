@@ -17,12 +17,18 @@ pipeline {
                     echo 'running successfully'
             }
         }
+        stage('Debug') {
+            steps {
+                    sh 'id'  // Show current user and groups
+                    sh 'env' // Show environment variables
+            }    
+        }
         stage('Push to DockerHub') {
             steps {
                     withDockerRegistry(credentialsId: "dockerhub", url: "https://index.docker.io/v2/"){
                        sh "sudo docker build -t automated-web-app ." 
-                       sh "docker tag automated-web-app aymane55/automated-web-app:latest "
-                       sh "docker push aymane55/automated-web-app:latest "
+                       sh "docker tag automated-web-app aymane55/automated-web-app:999"
+                       sh "docker push aymane55/automated-web-app:999"
                     }
             }
         }
