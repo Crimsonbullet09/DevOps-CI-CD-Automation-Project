@@ -27,6 +27,7 @@ pipeline {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', registryCredential) {
                         sh "sudo docker push ${registry}:${buildNumber}"
+
                     }
                 }
             }
