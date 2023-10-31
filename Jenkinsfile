@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        registry = "aymane55/automated-web-app"
         registryCredential = 'dockerhub' 
         buildNumber = "${env.BUILD_NUMBER}"
     }
@@ -26,7 +25,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', registryCredential) {
-                        sh "sudo docker push ${registry}:${buildNumber}"
+                        sh "sudo docker push automated-web-app:${buildNumber}"
                     }
                 }
             }
