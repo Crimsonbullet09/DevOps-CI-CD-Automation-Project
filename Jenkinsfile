@@ -22,12 +22,8 @@ pipeline {
             }
         }
         stage('Push to DockerHub') {
-            steps {
-                script {
                     withDockerRegistry([ credentialsId: "dockerhub", url: "https://index.docker.io/v1/" ]) {
                         sh "sudo docker push ${registry}:${buildNumber}"
-                    }
-                }
             }
         }
     }
