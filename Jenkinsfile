@@ -8,21 +8,21 @@ pipeline {
     }
 
     stages {
-        stage('stage 1 : Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     sh "sudo docker build -t automated-web-app:${buildNumber} ."
                 }
             }
         }
-        stage('stage 2 : Run Docker Container') {
+        stage('Run Docker Container') {
             steps {
                 script {
                     sh "sudo docker run -d -p 3000:3000 automated-web-app:${buildNumber}"
                 }
             }
         }
-        stage('stage 3 : Push to DockerHub') {
+        stage('Push to DockerHub') {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', registryCredential) {
