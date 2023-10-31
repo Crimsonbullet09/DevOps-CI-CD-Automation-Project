@@ -27,8 +27,8 @@ pipeline {
             steps {
                     withDockerRegistry(credentialsId: "dockerhub", url: "https://index.docker.io/v2/"){
                        sh "sudo docker build -t automated-web-app ." 
-                       sh "docker tag automated-web-app aymane55/automated-web-app:999"
-                       sh "docker push aymane55/automated-web-app:999"
+                       sh "sudo docker tag automated-web-app aymane55/automated-web-app:999"
+                       sh "sudo docker push aymane55/automated-web-app:999"
                     }
             }
         }
