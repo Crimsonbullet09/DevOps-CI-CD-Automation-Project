@@ -25,7 +25,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', registryCredential) {
-                        sh "sudo docker push automated-web-app:${buildNumber}"
+                        sh "sudo docker tag automated-web-app:${buildNumber} aymane55/automated-web-app"
+                        sh "sudo docker push automated-web-app:${buildNumber} aymane55/automated-web-app"
                     }
                 }
             }
