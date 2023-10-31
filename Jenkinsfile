@@ -2,36 +2,36 @@ pipeline {
     agent any
 
     environment {
-    	registry = "aymane55/automated-web-app"
         buildNumber = "${env.BUILD_NUMBER}"
     }
 
     stages {
         stage('Build Docker Image') {
             steps {
-                    echo 'built successfully'
+                script {
+                    echo 'Building Docker Image...'
+                    dockerImage = docker.build("automated-web-app:${buildNumber}")
+                }
             }
         }
         stage('Run Docker Container') {
             steps {
-                    echo 'running successfully'
+                script {
+                    echo 'Running Docker Container...'
+                    sh "docker run -d -p 3000:3000 automated-web-app:${buildNumber}"
+                }
             }
         }
-        stage('Debug') {
+        stage('Push Image to DockerHub') {
             steps {
-                    sh 'id'  // Show current user and groups
-                    sh 'env' // Show environment variables
-            }    
-        }
-        stage('Push to DockerHub') {
-            steps {
-                script{
+                script {
+                    echo 'Pushing Docker Image to DockerHub...'
                     docker.withRegistry('https://registry-1.docker.io/v2/', 'dockerhub') {
-                       dockerImage = docker.build("aymane55/automated-web-app:88")
-                       dockerImage.push() 
+                        dockerImage.push()
                     }
                 }
             }
         }
     }
 }
+
