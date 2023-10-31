@@ -25,9 +25,8 @@ pipeline {
         }
         stage('Push to DockerHub') {
             steps {
-                    withDockerRegistry(credentialsId: "dockerhub", url: "https://index.docker.io/v2/"){
-                       sh "sudo docker build -t automated-web-app ." 
-                       sh "sudo docker tag automated-web-app aymane55/automated-web-app:999"
+                    withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+                       sh "sudo docker build -t aymane55/automated-web-app:999 ."
                        sh "sudo docker push aymane55/automated-web-app:999"
                     }
             }
