@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building Docker Image...'
-                    dockerImage = docker.build("$Registry:1.0)
+                    dockerImage = docker.build("$Registry:1.0")
                 }
             }
         }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running Docker Container...'
-                    sh 'sudo docker run -d -p 3000:3000 $Registry:1.0'
+                    sh "sudo docker run -d -p 3000:3000 $Registry:1.0"
                 }
             }
         }
