@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        registry = "aymane55/automated-web-app"
+        Registry = 'aymane55/automated-web-app'
+        CredentialsId = 'dockerhub'
     }
 
     stages {
@@ -10,7 +11,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building Docker Image...'
-                    dockerImage = docker.build("$registry:${env.BUILD_NUMBER}")
+                    dockerImage = docker.build("$Registry:1.0)
                 }
             }
         }
@@ -19,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running Docker Container...'
-                    sh "sudo docker run -d -p 3000:3000 $registry:${env.BUILD_NUMBER}"
+                    sh 'sudo docker run -d -p 3000:3000 $Registry:1.0'
                 }
             }
         }
@@ -27,7 +28,7 @@ pipeline {
         stage('Push image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
+                    docker.withRegistry( 'https://registry-1.docker.io/v2/', CredentialsId ) {
                         dockerImage.push()
                     }
                 }
