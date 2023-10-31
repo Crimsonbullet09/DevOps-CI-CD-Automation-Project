@@ -2,6 +2,8 @@ pipeline {
     agent any
 
     environment {
+
+        def dockerImage
     	registry = "aymane55/automated-web-app"
         buildNumber = "${env.BUILD_NUMBER}"
     }
@@ -25,8 +27,9 @@ pipeline {
         }
         stage('Push to DockerHub') {
             steps {
-                    withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-                       sh "sudo docker push aymane55/automated-web-app:999"
+                    docker.withRegistry('https://registry-1.docker.io/v2/', 'dockerhub') {
+                       dockerImage = docker.build("aymane55/automated-web-app:88")
+                       dockerImage.push() 
                     }
             }
         }
