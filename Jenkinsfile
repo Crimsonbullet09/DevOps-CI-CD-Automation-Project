@@ -27,10 +27,12 @@ pipeline {
         }
         stage('Push to DockerHub') {
             steps {
+                script{
                     docker.withRegistry('https://registry-1.docker.io/v2/', 'dockerhub') {
                        dockerImage = docker.build("aymane55/automated-web-app:88")
                        dockerImage.push() 
                     }
+                }
             }
         }
     }
