@@ -1,9 +1,9 @@
 pipeline {
     agent any
+    checkout scm
+    def dockerImage
 
     environment {
-
-        def dockerImage
     	registry = "aymane55/automated-web-app"
         buildNumber = "${env.BUILD_NUMBER}"
     }
