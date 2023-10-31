@@ -5,8 +5,6 @@ pipeline {
         registry = "aymane55/automated-web-app"
     }
 
-    def dockerImage            // Declaring dockerImage at the pipeline level
-
     stages {
         stage('Build image') {
             steps {
